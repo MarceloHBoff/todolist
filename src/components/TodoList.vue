@@ -21,29 +21,7 @@
 
     <Footer :remaining="remaining" />
 
-    <div class="filters">
-      <button
-        class="filter"
-        :class="{ active: filter == 'all' }"
-        @click="filter = 'all'"
-      >
-        All
-      </button>
-      <button
-        class="filter"
-        :class="{ active: filter == 'active' }"
-        @click="filter = 'active'"
-      >
-        Active
-      </button>
-      <button
-        class="filter"
-        :class="{ active: filter == 'completed' }"
-        @click="filter = 'completed'"
-      >
-        Completed
-      </button>
-    </div>
+    <filters :filter="filter" @setFilter="setFilter" />
   </div>
 </template>
 
@@ -51,6 +29,7 @@
 import Vue from "vue";
 import TodoItem from "./TodoItem.vue";
 import Footer from "./Footer.vue";
+import Filters from "./Filters.vue";
 
 interface Todo {
   id: number;
@@ -61,7 +40,7 @@ interface Todo {
 
 export default Vue.extend({
   name: "todo-list",
-  components: { TodoItem, Footer },
+  components: { TodoItem, Footer, Filters },
   data: () => ({
     newTodo: "",
     beforeEditCache: "",
@@ -106,6 +85,10 @@ export default Vue.extend({
 
     finishedEdit({ index, todo }: { index: number; todo: Todo }) {
       this.todos.splice(index, 1, todo);
+    },
+
+    setFilter(filter: string) {
+      this.filter = filter;
     }
   }
 });
@@ -136,26 +119,5 @@ export default Vue.extend({
   justify-content: space-between;
   align-items: center;
   color: #fff;
-}
-
-.filters {
-  display: flex;
-  justify-content: flex-start;
-  padding: 16px 0;
-  border-top: 1px solid #ccc;
-}
-
-.filter {
-  background: #35495e;
-  border-radius: 8px;
-  margin-right: 16px;
-  padding: 8px;
-  font-weight: bold;
-  font-size: 14px;
-  color: #fff;
-}
-
-.active {
-  background: #42b883;
 }
 </style>

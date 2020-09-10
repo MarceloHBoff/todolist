@@ -3,7 +3,13 @@
     <div class="list-item" @dblclick="editTodo">
       <input type="checkbox" v-model="completed" @change="doneEdit" />
 
-      <div class="list-label" :class="{ completedTodo: completed }" v-if="!editing">{{ title }}</div>
+      <div
+        class="list-label"
+        :class="{ completedTodo: completed }"
+        v-if="!editing"
+      >
+        {{ title }}
+      </div>
 
       <input
         type="text"
@@ -35,8 +41,7 @@ export default Vue.extend({
   name: "todo-item",
   props: {
     todo: { type: Object as () => Todo, required: true },
-    index: { type: Number, required: true },
-    checkAll: { type: Boolean, required: true },
+    index: { type: Number, required: true }
   },
   data() {
     return {
@@ -44,20 +49,15 @@ export default Vue.extend({
       title: this.todo.title,
       completed: this.todo.completed,
       editing: this.todo.editing,
-      beforeEditCache: "",
+      beforeEditCache: ""
     };
-  },
-  watch: {
-    checkAll() {
-      this.completed = this.checkAll ? true : this.todo.completed;
-    },
   },
   directives: {
     focus: {
-      inserted: function (el) {
+      inserted: function(el) {
         el.focus();
-      },
-    },
+      }
+    }
   },
   methods: {
     editTodo(): void {
@@ -79,15 +79,15 @@ export default Vue.extend({
           id: this.id,
           title: this.title,
           completed: this.completed,
-          editing: this.editing,
-        },
+          editing: this.editing
+        }
       });
     },
 
     removeTodo(index: number): void {
       this.$emit("removeTodo", index);
-    },
-  },
+    }
+  }
 });
 </script>
 
