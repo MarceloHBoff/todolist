@@ -1,7 +1,7 @@
 <template>
-  <div class="footer">
+  <footer>
     <div>{{ remaining }} items left</div>
-  </div>
+  </footer>
 </template>
 
 <script lang="ts">
@@ -14,7 +14,7 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
-.footer {
+footer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
